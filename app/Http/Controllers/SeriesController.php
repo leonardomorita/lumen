@@ -9,7 +9,7 @@ class SeriesController
 {
     public function index()
     {
-        return Serie::all();
+        return Serie::all(); // retorna todos os registros da tabela 'series'.
     }
 
     public function store(Request $requisicao)
@@ -36,5 +36,14 @@ class SeriesController
         $serie->save();
 
         return $serie;
+    }
+
+    public function destroy(int $id)
+    {
+        $quantidadeRecursosRemovidos = Serie::destroy($id);
+        if ($quantidadeRecursosRemovidos === 0) {
+            return response()->json(['mensagem' => 'Recurso não encontrado'], 404);
+        }
+        return response()->json(['mensagem' => 'Recurso removido'], 204);
     }
 }
