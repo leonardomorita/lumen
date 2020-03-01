@@ -8,9 +8,14 @@ abstract class BaseController
 {
     protected $classe;
 
-    public function index()
+    public function index(Request $requisicao)
     {
-        return $this->classe::all(); // retorna todos os registros da tabela.
+        /*$offset = ($requisicao->page - 1) * $requisicao->per_page;
+        return $this->classe::query()
+            ->offset($offset) // offset -> busque a partir deste elemento exclusivo, ou seja, a partir do próximo elemento
+            ->limit($requisicao->per_page)
+            ->get();*/
+        return $this->classe::paginate($requisicao->per_page);
     }
 
     public function store(Request $requisicao)
