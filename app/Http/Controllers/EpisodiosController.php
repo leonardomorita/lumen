@@ -13,6 +13,7 @@ class EpisodiosController extends BaseController
 
     public function buscarPorSerie(int $serieId)
     {
+        // Retornar todos os episódios de uma série especificado pelo parâmetro.
         $episodios = Episodio::query()->where('serie_id', $serieId)->paginate();
 
         return $episodios;
